@@ -108,7 +108,7 @@ jobs:
           python3 -m pip install ruamel.yaml scons numpy cython sphinx \
           sphinxcontrib-katex sphinxcontrib-matlabdomain sphinxcontrib-doxylink
       - name: Build Cantera with documentation
-        run: python3 `which scons` doxygen_docs=y sphinx_docs=y
+        run: python3 `which scons` build doxygen_docs=y sphinx_docs=y
 
   ubuntu-1604-py2:
     # Ubuntu 16.04 using Python 2 to run SCons and the system Python 3 for the interface
