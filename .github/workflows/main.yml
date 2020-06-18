@@ -87,7 +87,7 @@ jobs:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   docs:
-    name: Build docs and upload to website
+    name: Build docs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -109,6 +109,17 @@ jobs:
           sphinxcontrib-katex sphinxcontrib-matlabdomain sphinxcontrib-doxylink
       - name: Build Cantera with documentation
         run: python3 `which scons` build doxygen_docs=y sphinx_docs=y
+  
+  upload-docs:
+    if: github.event_name == 'push' && github.repository_owner == 'Cantera' && github.ref == 'master'
+    name: Upload the docs to the website
+    needs: [docs]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retrieve docs artifact
+        run: echo "Retrieve artifact"
+      - name: Upload the docs
+        run: echo "Upload docs"
 
   ubuntu-1604-py2:
     # Ubuntu 16.04 using Python 2 to run SCons and the system Python 3 for the interface
